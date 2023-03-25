@@ -34,7 +34,7 @@ void busquedalineal(int arreglo[], int n, int elemento){
     }
 }
 
-//Funcion de busqueda e impresion de burbuja
+//Funcion de ordenamiento burbuja
 void burbuja(int arreglo[], int n){
     int i, j, aux;
     for(i = 0; i < n; i++){
@@ -56,27 +56,34 @@ int main(){
 
     //Arreglo de n elementos enteros generados de manera aleatoria
     int tamarreglo;
-        //Pedir el tamaño del arreglo
+    
+    //Pedir el tamaño del arreglo
     printf("Ingrese el tamaño del arreglo: ");
     scanf("%d", &tamarreglo);
     int arreglo[tamarreglo];
+    
     //Generar el arreglo
     generarArreglo(tamarreglo, arreglo);
 
     //Imprimir el arreglo
     printf("El arreglo de %d elementos aleatorios es: \n", tamarreglo);
+    //Llamado a la función para imprimr 
     imprimirArreglo(tamarreglo, arreglo);
 
     //Elemento a buscar
     int elemento;
     printf("Ingrese el elemento a buscar: ");
     scanf("%d", &elemento);
-
+    
+    //Llamado a la funcion de busqueda
     busquedalineal(arreglo, tamarreglo, elemento);
     printf("\n");
     printf("El arreglo ordenado es: \n");
+    
+    //Llamado a la funcion de ordenamiento
     burbuja(arreglo, tamarreglo);
-
+    
+    //Llamado a la funcion para imprimir 
     imprimirArreglo(tamarreglo, arreglo);
 
 
