@@ -45,7 +45,7 @@ void burbuja(int arreglo[], int n){
                 arreglo[j + 1] = aux;
             }
         }
-    }10
+    }
 }
 
 int main(){
