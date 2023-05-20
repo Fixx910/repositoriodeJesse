@@ -27,6 +27,7 @@ typedef struct elemento
 {
 	//Variables de la estructura "elemento" (El usuario puede modificar)
 	int c;
+	int numero;
 	//***
 	//***
 	//***
@@ -232,19 +233,43 @@ elemento ObtenerMenorElemento(pila *s)
     return menor;
 }
 
+// Función para ordenar una pila de forma ascendente
+void OrdenarPila(pila *s)
+{
+    pila auxiliar; // Pila auxiliar para almacenar los elementos ordenados temporalmente
+    Initialize(&auxiliar);
+
+    while (!Empty(s))
+    {
+        elemento temp = Pop(s);
+
+        while (!Empty(&auxiliar) && temp.c < Top(&auxiliar).c)
+        {
+            Push(s, Pop(&auxiliar));
+        }
+
+        Push(&auxiliar, temp);
+    }
+
+    // Copiar los elementos ordenados de la pila auxiliar a la pila original
+    while (!Empty(&auxiliar))
+    {
+        Push(s, Pop(&auxiliar));
+    }
+}
+
+
 int main()
 {
+	pila miPilaimprimir;
     pila miPila;
-    elemento menorElemento;
-
-    int entero;
-    int numeroElementos;
 
     // Inicializar la pila
     Initialize(&miPila);
+	Initialize(&miPilaimprimir);
+	int numeroElementos, entero;
 
     // Empilar algunos elementos de ejemplo
-    //El usuario agrega hasta 10 elementos
     printf("Ingrese el numero de elementos de la pila: ");
     scanf("%d", &numeroElementos);
 
@@ -254,14 +279,29 @@ int main()
 
         scanf("%d", &entero);
         elemento e={entero};
+		elemento e2={entero};
         Push(&miPila, e);
+		Push(&miPilaimprimir, e2);
     }
 
-    // Obtener el elemento menor de la pila
-    menorElemento = ObtenerMenorElemento(&miPila);
+    printf("Pila original: ");
+    while (!Empty(&miPilaimprimir))
+    {
+        printf("%d ", Top(&miPilaimprimir).c);
+        Pop(&miPilaimprimir);
+    }
+    printf("\n");
 
-    // Mostrar el elemento menor
-    printf("El elemento menor de la pila es: %d\n", menorElemento.c);
+    // Ordenar la pila
+    OrdenarPila(&miPila);
+
+    printf("Pila ordenada: ");
+    while (!Empty(&miPila))
+    {
+        printf("%d ", Top(&miPila).c);
+        Pop(&miPila);
+    }
+    printf("\n");
 
     return 0;
 }
