@@ -1,3 +1,5 @@
+import pandas as pd
+
 #Importar datos
 iris =pd.read_csv("iris.csv")
 
